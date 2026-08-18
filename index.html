@@ -365,8 +365,9 @@
 
     <!-- 6. GUI -> CLI -> API -->
     <section class="slide">
-      <div class="kicker">Three interfaces</div>
+      <div class="kicker">Three interfaces · the history of human-computer interaction</div>
       <h2>GUI → CLI → API</h2>
+      <p class="lead" style="margin-top:2vh;">Each interface trades <strong>ease of use</strong> against <strong>power</strong>.</p>
       <div class="progression">
         <div class="prog-step">
           <div class="prog-name">GUI</div>
@@ -386,7 +387,8 @@
           <div class="prog-note">most powerful &amp; flexible · must learn code</div>
         </div>
       </div>
-      <p style="margin-top:3vh;">Most people stop at GUI — but <strong>API</strong> is where LLMs unlock their full power.</p>
+      <p style="margin-top:3vh;">GUI is easy but limited · CLI/API are powerful but demand learning — the designer's eternal struggle.</p>
+      <p style="margin-top:1.5vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🤖 AI is the new bridge — describe the task in plain words, and the LLM writes the API code for you.</p>
     </section>
 
     <!-- 7. AI writes the code -->
@@ -395,12 +397,14 @@
       <div class="kicker">The unlock</div>
       <h2>AI writes the code<br />that talks to APIs</h2>
       <p class="lead" style="margin-top:3vh;">Describe a task in plain language and get working code — automate tasks, analyse data, build applications. <strong>That's what powers an agent.</strong></p>
+      <p style="margin-top:2vh;">Why API &gt; GUI for this: with code you can <strong>programme the whole workflow</strong> and feed materials to the LLM <strong>programmatically</strong> — no copy-paste, no click-by-click.</p>
     </section>
 
     <!-- 8. Chatbot vs agent -->
     <section class="slide">
       <div class="kicker">The shift</div>
       <h2>From chatbots<br />to agents</h2>
+      <p class="lead" style="margin-top:2vh;">A revisit of the earlier point — this workshop is about moving from <strong>talking</strong> to <strong>acting</strong>.</p>
       <div class="grid two">
         <div class="card">
           <span class="pill">Chatbot</span>
@@ -425,13 +429,16 @@
         <li><span>🧮</span> Score</li>
         <li><span>✍️</span> Draft</li>
       </ul>
-      <p style="margin-top:4vh;">Four verbs. Instead of one answer, the agent runs a pipeline and returns <strong>ranked evidence, scores, and drafts</strong> a human can review.</p>
+      <p style="margin-top:3vh;">Four verbs. Instead of one answer, the agent runs a pipeline and returns <strong>ranked evidence, scores, and drafts</strong> a human can review.</p>
+      <p style="margin-top:1.5vh;">Agentic = <strong>act autonomously</strong>: the model decides which tools to call, in what order, based on what it sees. The intelligence is in those decisions.</p>
+      <p style="margin-top:1.5vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🚧 Example — fix a bug: edit the file → run the tests → still failing? call the debugger → retry, until the tests pass.</p>
     </section>
 
     <!-- 10. Why not just a chatbot -->
     <section class="slide">
       <div class="kicker">The gap</div>
       <h2>Why not just a chatbot?</h2>
+      <p class="lead" style="margin-top:2vh;">A chatbot gives you <em>text</em>; an agent gives you <em>code that acts</em>. So the honest question is —</p>
       <div class="compare">
         <div class="compare-col bad">
           <div class="compare-head">Generic chatbot</div>
@@ -453,6 +460,7 @@
           </ul>
         </div>
       </div>
+      <p style="margin-top:2.5vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">💡 The golden test — does the agentic tool actually outperform the chatbot at the real task? It's also the hardest question to answer when introducing agents.</p>
     </section>
 
     <!-- 11. The design framework -->
