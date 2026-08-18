@@ -173,6 +173,23 @@
   .datamap .box small { display: block; font-weight: 500; color: var(--muted); font-size: 0.82em; margin-top: 0.3vh; }
   .datamap .stage-arrow { align-self: center; font-size: 1.4rem; padding: 0 0.4vw; line-height: 1; color: var(--accent); font-weight: 800; }
 
+  /* Agent workflow animation - boxes light up in sequence (the agent calling each tool) */
+  @keyframes agentFlow {
+    0%, 100% { border-color: var(--line); background: #fafbff; box-shadow: none; transform: none; }
+    12%, 34% { border-color: var(--accent); background: #eef0ff; box-shadow: 0 0 0 5px rgba(79,70,229,0.14); transform: translateY(-2px); }
+  }
+  .slide.active .datamap.agent-flow .box {
+    animation: agentFlow 8s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 1s);
+  }
+  @keyframes flowDot { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  .slide.active .datamap.agent-flow .stage.process .stage-label::after {
+    content: " \25B6";  /* play triangle */
+    display: inline-block;
+    color: var(--accent);
+    animation: flowDot 1.2s ease-in-out infinite;
+  }
+
   .cta-row { display: flex; gap: 2vw; margin-top: 5vh; flex-wrap: wrap; }
   a.btn {
     display: inline-flex;
@@ -579,28 +596,28 @@
 
     <!-- 16. Use case 1 — data map -->
         <section class="slide">
-      <img class="illustration" src="assets/cc/search.jpg" alt="Magnifying glass" />
       <div class="kicker">Framework in action · Use case 1 · Chris</div>
       <h2>OIRP Evidence Assistant</h2>
       <p class="lead" style="margin-top:2vh;">Find + score <strong>public web evidence</strong> for the THE Sustainability Impact Ratings.</p>
-      <div class="datamap">
+      <p style="margin-top:1.2vh;"><span class="pill">▶ Watch it run</span> the boxes light up in order as the agent calls each tool.</p>
+      <div class="datamap agent-flow">
         <div class="stage">
           <div class="stage-label">Input</div>
-          <div class="box">SDG criterion<small>e.g. 17.2.1 + focus / scope / cycle</small></div>
+          <div class="box" style="--i:0">SDG criterion<small>e.g. 17.2.1 + focus / scope / cycle</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage process">
           <div class="stage-label">Process</div>
-          <div class="box">Search<small>Brave API + HKBU hubs</small></div>
-          <div class="box">Fetch<small>HTML + PDF</small></div>
-          <div class="box">Score<small>THE rubric · specific / general</small></div>
-          <div class="box">Report<small>ranked + keywords</small></div>
-          <div class="box">Draft gaps<small>keyword-rich rewrite</small></div>
+          <div class="box" style="--i:1">Search<small>Brave API + HKBU hubs</small></div>
+          <div class="box" style="--i:2">Fetch<small>HTML + PDF</small></div>
+          <div class="box" style="--i:3">Score<small>THE rubric · specific / general</small></div>
+          <div class="box" style="--i:4">Report<small>ranked + keywords</small></div>
+          <div class="box" style="--i:5">Draft gaps<small>keyword-rich rewrite</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage">
           <div class="stage-label">Output</div>
-          <div class="box">Ranked evidence + draft<small>→ submit URL to THE</small></div>
+          <div class="box" style="--i:6">Ranked evidence + draft<small>→ submit URL to THE</small></div>
         </div>
       </div>
       <p style="margin-top:2.2vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🧑‍💼 Human in the loop — OIRP reviews + submits; a colleague publishes drafted content.</p>
@@ -611,27 +628,27 @@
 
     <!-- 17. Use case 2 — data map -->
         <section class="slide">
-      <img class="illustration" src="assets/cc/data.png" alt="Spreadsheet data" />
       <div class="kicker">Framework in action · Use case 2 · Daisy</div>
       <h2>CDCF Data Checker</h2>
       <p class="lead" style="margin-top:2vh;">CDCF = <strong>Common Data Collection Framework</strong> — Table 20.1 Student Enrolment (UGC-funded Long Programmes). Units upload their table; the tool checks it <strong>before</strong> submission to OIRP.</p>
-      <div class="datamap">
+      <p style="margin-top:1.2vh;"><span class="pill">▶ Watch it run</span> the boxes light up in order as each check runs on the table.</p>
+      <div class="datamap agent-flow">
         <div class="stage">
           <div class="stage-label">Input</div>
-          <div class="box">Unit's Table 20.1<small>+ spec, mappings, historical data</small></div>
+          <div class="box" style="--i:0">Unit's Table 20.1<small>+ spec, mappings, historical data</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage process">
           <div class="stage-label">Process</div>
-          <div class="box">Rule checks<small>codes · arithmetic · FTE · duration · duplicates</small></div>
-          <div class="box">Trend checks<small>≥30% swings · new years</small></div>
-          <div class="box">Report<small>errors + warnings per row</small></div>
-          <div class="box">Revise loop<small>fix → re-upload → re-check</small></div>
+          <div class="box" style="--i:1">Rule checks<small>codes · arithmetic · FTE · duration · duplicates</small></div>
+          <div class="box" style="--i:2">Trend checks<small>≥30% swings · new years</small></div>
+          <div class="box" style="--i:3">Report<small>errors + warnings per row</small></div>
+          <div class="box" style="--i:4">Revise loop<small>fix → re-upload → re-check</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage">
           <div class="stage-label">Output</div>
-          <div class="box">Clean table<small>→ submit to OIRP → UGC</small></div>
+          <div class="box" style="--i:5">Clean table<small>→ submit to OIRP → UGC</small></div>
         </div>
       </div>
       <p style="margin-top:2.2vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🧑‍💼 Human in the loop — units fix + confirm; OIRP does the high-level check.</p>
