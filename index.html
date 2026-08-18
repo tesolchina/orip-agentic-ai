@@ -499,56 +499,62 @@
     </section>
 
     <!-- 14. Use case 1 — data map -->
-    <section class="slide">
+        <section class="slide">
       <img class="illustration" src="assets/cc/search.jpg" alt="Magnifying glass" />
       <div class="kicker">Framework in action · Use case 1 · Chris</div>
       <h2>OIRP Evidence Assistant</h2>
-      <p class="lead" style="margin-top:2vh;">Finds and scores <strong>public web evidence</strong> for the THE Sustainability Impact Ratings.</p>
+      <p class="lead" style="margin-top:2vh;">Find + score <strong>public web evidence</strong> for the THE Sustainability Impact Ratings.</p>
       <div class="datamap">
         <div class="stage">
           <div class="stage-label">Input</div>
-          <div class="box">SDG criterion<small>from THE Methodology 2026</small></div>
+          <div class="box">SDG criterion<small>e.g. 17.2.1 + focus / scope / cycle</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage process">
           <div class="stage-label">Process</div>
-          <div class="box">Search HKBU public web<small>Brave API + known hubs</small></div>
-          <div class="box">Fetch sources<small>HTML + PDF</small></div>
-          <div class="box">Score vs THE rubric<small>statement + relevance + public</small></div>
+          <div class="box">Search<small>Brave API + HKBU hubs</small></div>
+          <div class="box">Fetch<small>HTML + PDF</small></div>
+          <div class="box">Score<small>THE rubric · specific / general</small></div>
+          <div class="box">Report<small>ranked + keywords</small></div>
+          <div class="box">Draft gaps<small>keyword-rich rewrite</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage">
           <div class="stage-label">Output</div>
-          <div class="box">Ranked evidence table<small>+ explanations</small></div>
-          <div class="box">Draft for gaps<small>content to fill</small></div>
+          <div class="box">Ranked evidence + draft<small>→ submit URL to THE</small></div>
         </div>
       </div>
+      <p style="margin-top:2.2vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🧑‍💼 Human in the loop — OIRP reviews + submits; a colleague publishes drafted content.</p>
+      <p style="margin-top:1.2vh;"><span class="pill">Key finding</span> 17.2.1 scored 1/3 — real activity, wrong wording (the "keyword pitfall").</p>
     </section>
 
     <!-- 15. Use case 2 — data map -->
-    <section class="slide">
+        <section class="slide">
       <img class="illustration" src="assets/cc/data.png" alt="Spreadsheet data" />
       <div class="kicker">Framework in action · Use case 2 · Daisy</div>
       <h2>CDCF Data Checker</h2>
-      <p class="lead" style="margin-top:2vh;">Real-time <strong>data checking + trend analysis</strong> for CDCF Table 20.1 (Student Enrolment).</p>
+      <p class="lead" style="margin-top:2vh;">Real-time <strong>data checking + trend analysis</strong> for CDCF Table 20.1.</p>
       <div class="datamap">
         <div class="stage">
           <div class="stage-label">Input</div>
-          <div class="box">CDCF tables<small>Table 20.1, uploaded by units</small></div>
+          <div class="box">Unit's Table 20.1<small>+ spec, mappings, historical data</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage process">
           <div class="stage-label">Process</div>
-          <div class="box">Validate fields<small>HEI, dates, codes, FTE arithmetic, duplicates</small></div>
-          <div class="box">Trend analysis<small>new vs historical, ≥30% flags</small></div>
+          <div class="box">Rule checks<small>codes · arithmetic · FTE · duration · duplicates</small></div>
+          <div class="box">Trend checks<small>≥30% swings · new years</small></div>
+          <div class="box">Report<small>errors + warnings per row</small></div>
+          <div class="box">Revise loop<small>fix → re-upload → re-check</small></div>
         </div>
         <div class="stage-arrow">→</div>
         <div class="stage">
           <div class="stage-label">Output</div>
-          <div class="box">Errors + warnings<small>with fix guidance</small></div>
-          <div class="box">Units revise → OIRP → UGC</div>
+          <div class="box">Clean table<small>→ submit to OIRP → UGC</small></div>
         </div>
       </div>
+      <p style="margin-top:2.2vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🧑‍💼 Human in the loop — units fix + confirm; OIRP does the high-level check.</p>
+      <p style="margin-top:1.2vh;"><span class="pill">Key finding</span> 6 planted errors — each rule catches a different one.</p>
     </section>
 
     <!-- 16. Try them live -->
