@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agentic AI in Action — ORIP Workshop</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --panel: #ffffff;
+    --ink: #1c2333;
+    --muted: #5b6472;
+    --accent: #4f46e5;
+    --accent-2: #0891b2;
+    --line: #e5e8f0;
+    --shadow: 0 20px 50px rgba(28, 35, 51, 0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .deck {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 7vh 8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
+  }
+
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    z-index: 1;
+  }
+
+  .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 2.2vh;
+  }
+
+  h1 { font-size: clamp(2.4rem, 7vw, 5rem); line-height: 1.04; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.9rem, 5vw, 3.4rem); line-height: 1.08; letter-spacing: -0.015em; }
+  h3 { font-size: clamp(1.3rem, 3.4vw, 2rem); line-height: 1.2; }
+  p, li { font-size: clamp(1.05rem, 2.2vw, 1.5rem); line-height: 1.5; color: var(--muted); }
+  p { max-width: 56ch; }
+  .lead { font-size: clamp(1.2rem, 2.8vw, 1.9rem); color: var(--muted); max-width: 60ch; }
+
+  .grid {
+    display: grid;
+    gap: 2.2vh 3vw;
+    margin-top: 4vh;
+  }
+  .grid.two { grid-template-columns: repeat(2, 1fr); }
+  .grid.four { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 3.2vh 2.2vw;
+    box-shadow: var(--shadow);
+  }
+  .card h3 { margin-bottom: 1.2vh; }
+  .card p, .card li { font-size: clamp(0.95rem, 1.7vw, 1.15rem); }
+
+  .pill {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    background: #eef0ff;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  .verbs { list-style: none; display: flex; flex-wrap: wrap; gap: 0.9vw; margin-top: 3vh; }
+  .verbs li {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 1.6vh 1.8vw;
+    font-weight: 700;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+  .verbs li span { color: var(--accent); }
+
+  .cta-row { display: flex; gap: 2vw; margin-top: 5vh; flex-wrap: wrap; }
+  a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+    padding: 2.4vh 2.6vw;
+    border-radius: 14px;
+    color: #fff;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  a.btn.secondary { background: var(--accent-2); border-color: var(--accent-2); }
+  a.btn:hover { transform: translateY(-2px); }
+  .btn small { display: block; font-weight: 500; font-size: 0.7em; opacity: 0.85; }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 1.2vw;
+    margin-top: 4vh;
+    flex-wrap: wrap;
+  }
+  .flow .step {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.8vh 1.6vw;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+  }
+  .flow .arrow { color: var(--accent); font-weight: 800; font-size: 1.6rem; }
+
+  .footer {
+    position: absolute;
+    left: 0; right: 0; bottom: 2.4vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4vw;
+    font-size: 0.85rem;
+    color: var(--muted);
+    z-index: 3;
+  }
+  .controls { display: flex; gap: 0.6rem; }
+  .controls button {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: 10px;
+    width: 44px; height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .progress { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; margin-top: 1vh; }
+  .progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width 0.3s ease; }
+  .counter { font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 720px) {
+    .grid.two, .grid.four { grid-template-columns: 1fr; }
+    .slide { padding: 6vh 6vw; }
+  }
+</style>
+</head>
+<body>
+  <main class="deck" id="deck">
+
+    <!-- 1. Title -->
+    <section class="slide active">
+      <div class="kicker">ORIP Workshop · HKBU Language Centre</div>
+      <h1>Agentic AI<br />in Action</h1></h1>
+      <p class="lead" style="margin-top:3vh;">Moving AI from <strong>answ</strong>ering questions</strong> to <strong>doing the work</strong> — searching</strong>, gathering evidence, scoring, and drafting.</p>
+    </section>
+
+    <!-- 2. Chatbot vs agent -->
+    <section class="slide">
+      <div class="kicker">The shift</div>
+      <h2>From chatbots<br</h2> />to agents</h2>
+      <div class="grid two">
+        <div class="card">
+          <span class="pill">Chatbot</span>
+          <h3>Tal</h3>ks</h3>
+          <p>You ask</p>, it answers. The work stays with you — the model only produces text.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Agent</span>
+          <h3>Acts</h</h3>3>
+          <p>It calls tools</p>, follows a plan, and produces a finished artefact — not just a reply.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. What an agent does -->
+    <section class="slide">
+      <div class="kicker">Capabilities</div>
+      <h2>What</h2> “agentic” means here</h2>
+      <ul class="verbs">
+        <li><span></span>🔎</span> Search</li>
+        <li><span>📄</span></span> Gather</li>
+        <li><span>🧮</span></span> Score</li>
+        <li><span>✍️</span> Draft</li>
+      </ul>
+     </span> <p style="margin-top:4vh;">Four verbs. Instead of one answer, the agent runs a pipeline and returns <strong>ranked evidence, scores</strong>, and drafts</strong> a human can review.</p>
+    </section>
+
+    <!-- 4. Use case 1 -->
+    <section class="slide">
+      <div class="kicker">Use case 1 · Chris</div>
+      <h2>OIRP Evidence Assistant</h2>
+      <p class="</h2>lead" style="margin-top:2vh;">Find and score <strong>public web evidence</strong</strong>> for the THE Sustainability Impact Ratings.</p>
+      <div class="flow">
+        <div class="step">Read a criterion</div>
+        <div class="arrow">→</div>
+        <div class="step">Search HKBU public web</div>
+        <div class="arrow">→</div>
+        <div class="step">Fetch HTML + PDF</div>
+        <div class="arrow">→</div>
+        <div class="step">Score vs THE rubric</div>
+        <div class="arrow">→</div>
+        <div class="step">Draft gaps</div>
+      </div>
+    </section>
+
+    <!-- 5. Use case 2 -->
+    <section class="slide">
+      <div class="kicker">Use case 2 · Daisy</div>
+      <h2>CDCF Data Check</h2>er</h2>
+      <p class="lead" style="margin-top:2vh;">Real-time <strong>data checking</strong> + trend analysis</strong> for CDCF Table 20.1 (Student Enrolment).</p>
+      <div class="flow">
+        <div class="step">Units upload tables</div>
+        <div class="arrow">→</div>
+        <div class="step">AI checks + trends</div>
+        <div class="arrow">→</div>
+        <div class="step">Units revise</div>
+        <div class="arrow">→</div>
+        <div class="step">Submit to OIRP → UGC</div>
+      </div>
+    </section>
+
+    <!-- 6. Try them live -->
+    <section class="slide">
+      <div class="kicker">Live demos</div>
+      <h2>Try them now</h2></h2>
+      <p style="margin-top:2vh;">Both tools are running on Railway. Open a link and explore.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://oirp-production.up.railway.app" target="_blank" rel="noopener">
+          <span>OIRP</span> Evidence Assistant<small>oirp-production.up.railway</small>.app</small></span>
+        </a>
+        <a class="btn secondary" href="https://cdcf-production.up.railway.app" target="_blank" rel="noopener">
+          <span>CDCF Data Checker<small>cd</span></small>cf-production.up.railway.app</small></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 7. Closing -->
+    <section class="slide">
+      <div class="kicker">Thanks</div>
+      <h2>Questions</h2>?</h2>
+      <p style="margin-top:3vh;">Agentic AI turns your tools from assistants that <em>answer</em> into colleagues</em> that <em>act</em>.</p>
+    </section>
+
+  </main>
+
+  <div</em> class="footer">
+    <span>Agentic AI · ORIP Workshop</span></span>
+    <div class="controls">
+      <button id="prev" aria-label="Previous">‹</button>
+      <button id="next" aria-label="Next">›</button>
+    </div>
+    <span class="counter" id="counter">1 / 7</span>
+  </div>
+  <div class="progress"><span id="bar"></span></div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  const bar = document.getElementById('bar');
+  let i = 0;
+
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    bar.style.width = ((i + 1) / slides.length * 100) + '%';
+  }
+
+  document.getElementById('next').addEventListener('click', () => go(i + 1));
+  document.getElementById('prev').addEventListener('click', () => go(i - 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') go(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(slides.length - 1);
+  });
+
+  let touchX = null;
+  document.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+
+  go(0);
+</script>
+</body>
+</html>
