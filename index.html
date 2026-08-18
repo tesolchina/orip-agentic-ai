@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Agentic AI in Action — ORIP</title> Workshop</title>
+<title>Agentic AI in Action — ORIP Workshop</title>
 <style>
   :root {
     --bg: #f6f7fb;
@@ -40,7 +40,6 @@
     transform: translateY(12px);
     transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
   }
-
   .slide.active { opacity: 1; visibility: visible; transform: none; z-index: 1; }
 
   .kicker {
@@ -56,11 +55,12 @@
   h2 { font-size: clamp(1.9rem, 5vw, 3.4rem); line-height: 1.08; letter-spacing: -0.015em; }
   h3 { font-size: clamp(1.3rem, 3.4vw, 2rem); line-height: 1.2; }
   p, li { font-size: clamp(1.05rem, 2.2vw, 1.5rem); line-height: 1.5; color: var(--muted); }
-  p { max-width: 60ch; }
+  p { max-width: 62ch; }
   .lead { font-size: clamp(1.2rem, 2.8vw, 1.9rem); color: var(--muted); max-width: 62ch; }
 
   .grid { display: grid; gap: 2.2vh 3vw; margin-top: 4vh; }
   .grid.two { grid-template-columns: repeat(2, 1fr); }
+  .grid.three { grid-template-columns: repeat(3, 1fr); }
 
   .card {
     background: var(--panel);
@@ -95,6 +95,43 @@
     box-shadow: var(--shadow);
   }
   .verbs li span { color: var(--accent); }
+
+  /* Code-as-bridge diagram */
+  .bridge { display: flex; align-items: stretch; gap: 1.4vw; margin-top: 4vh; }
+  .bridge-col { flex: 1; display: flex; flex-direction: column; gap: 1.4vh; }
+  .bridge-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.7rem; font-weight: 800; color: var(--muted); }
+  .bridge-box {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 2.8vh 1.6vw;
+    text-align: center;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+  }
+  .bridge-box small { display: block; font-weight: 500; color: var(--muted); font-size: 0.8em; margin-top: 0.6vh; }
+  .bridge-box.highlight { border-color: var(--accent); background: #eef0ff; }
+  .bridge-arrow { align-self: center; font-size: 2rem; color: var(--accent); font-weight: 800; }
+
+  /* GUI -> CLI -> API progression */
+  .progression { display: flex; align-items: stretch; gap: 1.4vw; margin-top: 4vh; }
+  .prog-step {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2.8vh 1.8vw;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+  }
+  .prog-step.api { border-color: var(--accent); background: #eef0ff; }
+  .prog-name { font-weight: 800; font-size: clamp(1.4rem, 2.6vw, 2rem); color: var(--accent); }
+  .prog-desc { font-weight: 600; color: var(--ink); font-size: clamp(0.9rem, 1.7vw, 1.15rem); }
+  .prog-note { color: var(--muted); font-size: clamp(0.82rem, 1.5vw, 1rem); }
+  .prog-arrow { align-self: center; font-size: 2rem; color: var(--accent); font-weight: 800; }
 
   /* Chatbot vs agent comparison */
   .compare { display: flex; gap: 1.5vw; margin-top: 4vh; align-items: stretch; }
@@ -156,6 +193,39 @@
   a.btn:hover { transform: translateY(-2px); }
   .btn small { display: block; font-weight: 500; font-size: 0.7em; opacity: 0.85; }
 
+  /* Hide-able QR */
+  .qr-fab {
+    position: fixed; top: 2.4vh; right: 2vw; z-index: 10;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.9vh 1.4vw;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+  }
+  .qr-overlay {
+    position: fixed; inset: 0; z-index: 20;
+    background: rgba(28, 35, 51, 0.55);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qr-overlay[hidden] { display: none; }
+  .qr-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.2rem 2.2rem 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    max-width: 90vw;
+  }
+  .qr-card img { width: 240px; height: 240px; display: block; margin: 0 auto; }
+  .qr-url { margin-top: 1.2rem; font-weight: 700; color: var(--ink); font-size: 1.05rem; }
+  .qr-hint { margin-top: 0.4rem; color: var(--muted); font-size: 0.85rem; }
+  .qr-close { margin-top: 1.2rem; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 10px; padding: 0.7rem 1.4rem; font-weight: 700; cursor: pointer; }
+
   .footer {
     position: absolute;
     left: 0; right: 0; bottom: 2.4vh;
@@ -182,9 +252,11 @@
   .counter { font-variant-numeric: tabular-nums; }
 
   @media (max-width: 720px) {
-    .grid.two, .compare, .datamap { flex-direction: column; grid-template-columns: 1fr; }
-    .slide { padding: 6vh 6vw; }
+    .grid.two, .grid.three { grid-template-columns: 1fr; }
+    .bridge, .progression, .compare, .datamap { flex-direction: column; }
+    .bridge-arrow, .prog-arrow, .datamap .stage-arrow { transform: rotate(90deg); align-self: center; }
     .vs { align-self: center; }
+    .slide { padding: 6vh 6vw; }
   }
 </style>
 </head>
@@ -196,9 +268,80 @@
       <div class="kicker">ORIP Workshop · HKBU Language Centre</div>
       <h1>Agentic AI<br />in Action</h1>
       <p class="lead" style="margin-top:3vh;">Moving AI from <strong>answering questions</strong> to <strong>doing the work</strong> — searching, gathering evidence, scoring, and drafting.</p>
+      <p style="margin-top:2vh;">Tap <strong>QR</strong> (top-right) to open these slides on your phone.</p>
     </section>
 
-    <!-- 2. Chatbot vs agent -->
+    <!-- 2. AI in education & research -->
+    <section class="slide">
+      <div class="kicker">Context</div>
+      <h2>AI in education<br />&amp; research</h2>
+      <p class="lead" style="margin-top:3vh;">From drafting and summarising to automating tasks and analysing data — AI is changing how we work.</p>
+    </section>
+
+    <!-- 3. LLMs write code -->
+    <section class="slide">
+      <div class="kicker">The key insight</div>
+      <h2>An LLM writes code,<br />not just text</h2>
+      <p class="lead" style="margin-top:3vh;">Beyond humanlike prose, an LLM can generate <strong>programming code</strong> — and code is what makes a computer <em>do</em> work.</p>
+    </section>
+
+    <!-- 4. Code is the bridge -->
+    <section class="slide">
+      <div class="kicker">The bridge</div>
+      <h2>Code is the bridge</h2>
+      <div class="bridge">
+        <div class="bridge-col">
+          <div class="bridge-label">Human</div>
+          <div class="bridge-box">Natural language<br /><small>ambiguous · flexible</small></div>
+        </div>
+        <div class="bridge-arrow">⇄</div>
+        <div class="bridge-col">
+          <div class="bridge-label">Code</div>
+          <div class="bridge-box highlight">Programming code<br /><small>human-readable + machine-executable</small></div>
+        </div>
+        <div class="bridge-arrow">⇄</div>
+        <div class="bridge-col">
+          <div class="bridge-label">Machine</div>
+          <div class="bridge-box">Machine language<br /><small>rigid · precise</small></div>
+        </div>
+      </div>
+      <p style="margin-top:3vh;">Code is a formal language halfway between human and machine.</p>
+    </section>
+
+    <!-- 5. GUI -> CLI -> API -->
+    <section class="slide">
+      <div class="kicker">Three interfaces</div>
+      <h2>GUI → CLI → API</h2>
+      <div class="progression">
+        <div class="prog-step">
+          <div class="prog-name">GUI</div>
+          <div class="prog-desc">Visual — windows, icons, buttons</div>
+          <div class="prog-note">accessible to everyone · limited to what it allows</div>
+        </div>
+        <div class="prog-arrow">→</div>
+        <div class="prog-step">
+          <div class="prog-name">CLI</div>
+          <div class="prog-desc">Text commands — DOS, Python, Git</div>
+          <div class="prog-note">more powerful · must learn syntax</div>
+        </div>
+        <div class="prog-arrow">→</div>
+        <div class="prog-step api">
+          <div class="prog-name">API</div>
+          <div class="prog-desc">Programming code — OpenAI API</div>
+          <div class="prog-note">most powerful &amp; flexible · must learn code</div>
+        </div>
+      </div>
+      <p style="margin-top:3vh;">Most people stop at GUI — but <strong>API</strong> is where LLMs unlock their full power.</p>
+    </section>
+
+    <!-- 6. AI writes the code -->
+    <section class="slide">
+      <div class="kicker">The unlock</div>
+      <h2>AI writes the code<br />that talks to APIs</h2>
+      <p class="lead" style="margin-top:3vh;">Describe a task in plain language and get working code — automate tasks, analyse data, build applications. <strong>That's what powers an agent.</strong></p>
+    </section>
+
+    <!-- 7. Chatbot vs agent -->
     <section class="slide">
       <div class="kicker">The shift</div>
       <h2>From chatbots<br />to agents</h2>
@@ -216,7 +359,7 @@
       </div>
     </section>
 
-    <!-- 3. What an agent does -->
+    <!-- 8. What an agent does -->
     <section class="slide">
       <div class="kicker">Capabilities</div>
       <h2>What "agentic" means here</h2>
@@ -229,7 +372,7 @@
       <p style="margin-top:4vh;">Four verbs. Instead of one answer, the agent runs a pipeline and returns <strong>ranked evidence, scores, and drafts</strong> a human can review.</p>
     </section>
 
-    <!-- 4. Why not just a chatbot -->
+    <!-- 9. Why not just a chatbot -->
     <section class="slide">
       <div class="kicker">The gap</div>
       <h2>Why not just a chatbot?</h2>
@@ -256,7 +399,7 @@
       </div>
     </section>
 
-    <!-- 5. Use case 1 — data map -->
+    <!-- 10. Use case 1 — data map -->
     <section class="slide">
       <div class="kicker">Use case 1 · Chris</div>
       <h2>OIRP Evidence Assistant</h2>
@@ -282,7 +425,7 @@
       </div>
     </section>
 
-    <!-- 6. Use case 2 — data map -->
+    <!-- 11. Use case 2 — data map -->
     <section class="slide">
       <div class="kicker">Use case 2 · Daisy</div>
       <h2>CDCF Data Checker</h2>
@@ -307,11 +450,11 @@
       </div>
     </section>
 
-    <!-- 7. Try them live -->
+    <!-- 12. Try them live -->
     <section class="slide">
       <div class="kicker">Live demos</div>
       <h2>Try them now</h2>
-      <p style="margin-top:2vh;">Both tools are running on Railway. Open a link and explore.</p>
+      <p style="margin-top:2vh;">Both tools are running on Railway. Scan the QR (top-right) to open these slides, or jump straight to a tool.</p>
       <div class="cta-row">
         <a class="btn" href="https://oirp-production.up.railway.app" target="_blank" rel="noopener">
           <span>OIRP Evidence Assistant<small>oirp-production.up.railway.app</small></span>
@@ -322,7 +465,7 @@
       </div>
     </section>
 
-    <!-- 8. Closing -->
+    <!-- 13. Closing -->
     <section class="slide">
       <div class="kicker">Thanks</div>
       <h2>Questions?</h2>
@@ -331,13 +474,24 @@
 
   </main>
 
+  <!-- Hide-able QR code -->
+  <button class="qr-fab" id="qrFab" aria-label="Show QR code">▦ QR</button>
+  <div class="qr-overlay" id="qrOverlay" hidden>
+    <div class="qr-card">
+      <img src="qr.svg" alt="QR code linking to these slides" />
+      <div class="qr-url">tesolchina.github.io/orip-agentic-ai</div>
+      <div class="qr-hint">Scan to follow along on your phone</div>
+      <button class="qr-close" id="qrClose">Close</button>
+    </div>
+  </div>
+
   <div class="footer">
     <span>Agentic AI · ORIP Workshop</span>
     <div class="controls">
       <button id="prev" aria-label="Previous">‹</button>
       <button id="next" aria-label="Next">›</button>
     </div>
-    <span class="counter" id="counter">1 / 8</span>
+    <span class="counter" id="counter">1 / 13</span>
   </div>
   <div class="progress"><span id="bar"></span></div>
 
@@ -345,19 +499,36 @@
   const slides = Array.from(document.querySelectorAll('.slide'));
   const counter = document.getElementById('counter');
   const bar = document.getElementById('bar');
+  const fab = document.getElementById('qrFab');
+  const overlay = document.getElementById('qrOverlay');
   let i = 0;
 
-  function go(n) {
-    i = (n + slides.length) % slides.length;
+  function render() {
     slides.forEach((s, k) => s.classList.toggle('active', k === i));
     counter.textContent = (i + 1) + ' / ' + slides.length;
     bar.style.width = ((i + 1) / slides.length * 100) + '%';
+  }
+
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    render();
+    const h = '#/' + (i + 1);
+    if (location.hash !== h) history.replaceState(null, '', h);
+  }
+
+  function parseHash() {
+    const m = location.hash.match(/#\/(\d+)/);
+    return m ? (parseInt(m[1], 10) - 1) : 0;
   }
 
   document.getElementById('next').addEventListener('click', () => go(i + 1));
   document.getElementById('prev').addEventListener('click', () => go(i - 1));
 
   document.addEventListener('keydown', (e) => {
+    if (!overlay.hidden) {
+      if (e.key === 'Escape') overlay.hidden = true;
+      return;
+    }
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') go(i + 1);
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
     if (e.key === 'Home') go(0);
@@ -373,7 +544,12 @@
     touchX = null;
   });
 
-  go(0);
+  fab.addEventListener('click', () => { overlay.hidden = !overlay.hidden; });
+  document.getElementById('qrClose').addEventListener('click', () => { overlay.hidden = true; });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.hidden = true; });
+
+  window.addEventListener('hashchange', () => go(parseHash()));
+  go(parseHash());
 </script>
 </body>
 </html>
