@@ -255,6 +255,12 @@
     position: absolute; top: 8vh; right: 5vw; width: 18vw; max-width: 260px;
     border-radius: 14px; box-shadow: var(--shadow); opacity: 0.9; z-index: 2;
   }
+  .title-logo {
+    position: absolute; top: 4vh; left: 5vw; height: 7vh; max-height: 64px;
+    background: rgba(255,255,255,0.9); padding: 1vh 1.2vw; border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+  .speaker { font-weight: 700; color: var(--ink); font-size: clamp(1rem, 2vw, 1.35rem); max-width: 62ch; }
   .slide.title-slide {
     background: linear-gradient(115deg, rgba(246,247,251,0.93) 25%, rgba(246,247,251,0.45)),
                 url('assets/cc/hero.jpg') center/cover no-repeat;
@@ -274,10 +280,12 @@
 
     <!-- 1. Title -->
     <section class="slide active title-slide">
+      <img class="title-logo" src="assets/oirp-logo.svg" alt="Office of Institutional Research and Planning, HKBU" />
       <div class="kicker">ORIP Workshop · HKBU Language Centre</div>
-      <h1>Agentic AI<br />in Action</h1>
+      <h1>Agentic AI in Action:<br />Transforming Evidence Collection &amp; Data Checking</h1>
       <p class="lead" style="margin-top:3vh;">Moving AI from <strong>answering questions</strong> to <strong>doing the work</strong> — searching, gathering evidence, scoring, and drafting.</p>
-      <p style="margin-top:2vh;">Tap <strong>QR</strong> (top-right) to open these slides on your phone.</p>
+      <p class="speaker" style="margin-top:2.5vh;">Dr Simon Wang · Lecturer in English &amp; Innovation Officer, the Language Centre, HKBU</p>
+      <p style="margin-top:1.5vh;">Tap <strong>QR</strong> (top-right) to open these slides on your phone.</p>
     </section>
 
     <!-- 2. AI in education & research -->
