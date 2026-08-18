@@ -261,6 +261,8 @@
     box-shadow: var(--shadow);
   }
   .speaker { font-weight: 700; color: var(--ink); font-size: clamp(1rem, 2vw, 1.35rem); max-width: 62ch; }
+  .split { display: grid; grid-template-columns: 1.25fr 1fr; gap: 3vw; align-items: center; margin-top: 3vh; }
+  .split-img { width: 100%; max-height: 50vh; object-fit: cover; border-radius: 16px; box-shadow: var(--shadow); }
   .slide.title-slide {
     background: linear-gradient(115deg, rgba(246,247,251,0.93) 25%, rgba(246,247,251,0.45)),
                 url('assets/cc/hero.jpg') center/cover no-repeat;
@@ -268,6 +270,7 @@
   @media (max-width: 720px) {
     .grid.two, .grid.three { grid-template-columns: 1fr; }
     .bridge, .progression, .compare, .datamap { flex-direction: column; }
+    .split { grid-template-columns: 1fr; }
     .bridge-arrow, .prog-arrow, .datamap .stage-arrow { transform: rotate(90deg); align-self: center; }
     .vs { align-self: center; }
     .slide { padding: 6vh 8vw; }
@@ -288,20 +291,31 @@
       <p style="margin-top:1.5vh;">Tap <strong>QR</strong> (top-right) to open these slides on your phone.</p>
     </section>
 
-    <!-- 2. AI in education & research -->
+    <!-- 2. The ChatGPT moment -->
     <section class="slide">
-      <img class="illustration" src="assets/ai-education.png" alt="AI in education and research" />
-      <div class="kicker">Context</div>
-      <h2>AI in education<br />&amp; research</h2>
-      <p class="lead" style="margin-top:3vh;">From drafting and summarising to automating tasks and analysing data — AI is changing how we work.</p>
+      <div class="kicker">Context · November 2022</div>
+      <h2>The ChatGPT moment</h2>
+      <div class="split">
+        <div>
+          <p class="lead">In Nov 2022, ChatGPT took the world by storm — an LLM that writes <strong>humanlike text</strong> in reply to a prompt, showing a real understanding of what you asked.</p>
+          <p style="margin-top:2vh;">And it turns out LLMs don't just <strong>write text</strong> — they can <strong>write code</strong> too.</p>
+        </div>
+        <img class="split-img" src="assets/cc/hero.jpg" alt="Artificial intelligence" />
+      </div>
     </section>
 
-    <!-- 3. LLMs write code -->
+    <!-- 3. LLMs write code + strawberry -->
     <section class="slide">
-      <img class="illustration" src="assets/cc/neural.png" alt="Neural network diagram" />
       <div class="kicker">The key insight</div>
       <h2>An LLM writes code,<br />not just text</h2>
-      <p class="lead" style="margin-top:3vh;">Beyond humanlike prose, an LLM can generate <strong>programming code</strong> — and code is what makes a computer <em>do</em> work.</p>
+      <div class="split">
+        <div>
+          <p class="lead">A text-only LLM trips over "how many r's in <em>strawberry</em>?" — but the moment it <strong>writes code</strong>, the answer is exact.</p>
+          <p style="margin-top:2vh;">That's <strong>agentic AI</strong>: the model generates code to solve problems it can't solve with text alone — calling tools and APIs to do real work.</p>
+        </div>
+        <img class="split-img" src="assets/cc/neural.png" alt="Neural network diagram" />
+      </div>
+      <p style="margin-top:2.5vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">💡 The divide — chatbot users get <em>text</em> back; agentic-AI users get <em>code</em> that acts on computers through APIs.</p>
     </section>
 
     <!-- 4. Code is the bridge -->
