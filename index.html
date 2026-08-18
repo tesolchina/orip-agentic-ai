@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Agentic AI in Action — ORIP Workshop</title>
+<title>Agentic AI in Action — ORIP</title> Workshop</title>
 <style>
   :root {
     --bg: #f6f7fb;
@@ -26,11 +26,7 @@
     overflow: hidden;
   }
 
-  .deck {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-  }
+  .deck { position: relative; height: 100vh; width: 100vw; }
 
   .slide {
     position: absolute;
@@ -45,12 +41,7 @@
     transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
   }
 
-  .slide.active {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    z-index: 1;
-  }
+  .slide.active { opacity: 1; visibility: visible; transform: none; z-index: 1; }
 
   .kicker {
     text-transform: uppercase;
@@ -65,16 +56,11 @@
   h2 { font-size: clamp(1.9rem, 5vw, 3.4rem); line-height: 1.08; letter-spacing: -0.015em; }
   h3 { font-size: clamp(1.3rem, 3.4vw, 2rem); line-height: 1.2; }
   p, li { font-size: clamp(1.05rem, 2.2vw, 1.5rem); line-height: 1.5; color: var(--muted); }
-  p { max-width: 56ch; }
-  .lead { font-size: clamp(1.2rem, 2.8vw, 1.9rem); color: var(--muted); max-width: 60ch; }
+  p { max-width: 60ch; }
+  .lead { font-size: clamp(1.2rem, 2.8vw, 1.9rem); color: var(--muted); max-width: 62ch; }
 
-  .grid {
-    display: grid;
-    gap: 2.2vh 3vw;
-    margin-top: 4vh;
-  }
+  .grid { display: grid; gap: 2.2vh 3vw; margin-top: 4vh; }
   .grid.two { grid-template-columns: repeat(2, 1fr); }
-  .grid.four { grid-template-columns: repeat(4, 1fr); }
 
   .card {
     background: var(--panel);
@@ -110,6 +96,46 @@
   }
   .verbs li span { color: var(--accent); }
 
+  /* Chatbot vs agent comparison */
+  .compare { display: flex; gap: 1.5vw; margin-top: 4vh; align-items: stretch; }
+  .compare-col { flex: 1; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 2.6vh 2vw; box-shadow: var(--shadow); }
+  .compare-col.good { border-color: var(--accent); }
+  .compare-head { font-weight: 800; font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 1.6vh; }
+  .compare-col.bad .compare-head { color: #b45309; }
+  .compare-col.good .compare-head { color: var(--accent); }
+  .compare ul { list-style: none; display: flex; flex-direction: column; gap: 1.2vh; }
+  .compare li { position: relative; padding-left: 1.8vw; font-size: clamp(0.9rem, 1.6vw, 1.1rem); color: var(--muted); }
+  .compare-col.bad li::before { content: "✕"; position: absolute; left: 0; color: #dc2626; font-weight: 800; }
+  .compare-col.good li::before { content: "✓"; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
+  .vs { align-self: center; font-weight: 800; color: var(--muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Data-flow map (input -> process -> output) */
+  .datamap { display: flex; gap: 1.2vw; margin-top: 4vh; align-items: stretch; }
+  .datamap .stage {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2.2vh 1.4vw;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+  }
+  .datamap .stage.process { flex: 1.7; }
+  .datamap .stage-label { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.7rem; font-weight: 800; color: var(--accent); }
+  .datamap .box {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.5vh 1vw;
+    background: #fafbff;
+    font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .datamap .box small { display: block; font-weight: 500; color: var(--muted); font-size: 0.82em; margin-top: 0.3vh; }
+  .datamap .stage-arrow { align-self: center; font-size: 2rem; color: var(--accent); font-weight: 800; }
+
   .cta-row { display: flex; gap: 2vw; margin-top: 5vh; flex-wrap: wrap; }
   a.btn {
     display: inline-flex;
@@ -129,23 +155,6 @@
   a.btn.secondary { background: var(--accent-2); border-color: var(--accent-2); }
   a.btn:hover { transform: translateY(-2px); }
   .btn small { display: block; font-weight: 500; font-size: 0.7em; opacity: 0.85; }
-
-  .flow {
-    display: flex;
-    align-items: center;
-    gap: 1.2vw;
-    margin-top: 4vh;
-    flex-wrap: wrap;
-  }
-  .flow .step {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 1.8vh 1.6vw;
-    font-weight: 600;
-    box-shadow: var(--shadow);
-  }
-  .flow .arrow { color: var(--accent); font-weight: 800; font-size: 1.6rem; }
 
   .footer {
     position: absolute;
@@ -173,8 +182,9 @@
   .counter { font-variant-numeric: tabular-nums; }
 
   @media (max-width: 720px) {
-    .grid.two, .grid.four { grid-template-columns: 1fr; }
+    .grid.two, .compare, .datamap { flex-direction: column; grid-template-columns: 1fr; }
     .slide { padding: 6vh 6vw; }
+    .vs { align-self: center; }
   }
 </style>
 </head>
@@ -184,24 +194,24 @@
     <!-- 1. Title -->
     <section class="slide active">
       <div class="kicker">ORIP Workshop · HKBU Language Centre</div>
-      <h1>Agentic AI<br />in Action</h1></h1>
-      <p class="lead" style="margin-top:3vh;">Moving AI from <strong>answ</strong>ering questions</strong> to <strong>doing the work</strong> — searching</strong>, gathering evidence, scoring, and drafting.</p>
+      <h1>Agentic AI<br />in Action</h1>
+      <p class="lead" style="margin-top:3vh;">Moving AI from <strong>answering questions</strong> to <strong>doing the work</strong> — searching, gathering evidence, scoring, and drafting.</p>
     </section>
 
     <!-- 2. Chatbot vs agent -->
     <section class="slide">
       <div class="kicker">The shift</div>
-      <h2>From chatbots<br</h2> />to agents</h2>
+      <h2>From chatbots<br />to agents</h2>
       <div class="grid two">
         <div class="card">
           <span class="pill">Chatbot</span>
-          <h3>Tal</h3>ks</h3>
-          <p>You ask</p>, it answers. The work stays with you — the model only produces text.</p>
+          <h3>Talks</h3>
+          <p>You ask, it answers. The work stays with you — the model only produces text.</p>
         </div>
         <div class="card">
           <span class="pill">Agent</span>
-          <h3>Acts</h</h3>3>
-          <p>It calls tools</p>, follows a plan, and produces a finished artefact — not just a reply.</p>
+          <h3>Acts</h3>
+          <p>It calls tools, follows a plan, and produces a finished artefact — not just a reply.</p>
         </div>
       </div>
     </section>
@@ -209,81 +219,125 @@
     <!-- 3. What an agent does -->
     <section class="slide">
       <div class="kicker">Capabilities</div>
-      <h2>What</h2> “agentic” means here</h2>
+      <h2>What "agentic" means here</h2>
       <ul class="verbs">
-        <li><span></span>🔎</span> Search</li>
-        <li><span>📄</span></span> Gather</li>
-        <li><span>🧮</span></span> Score</li>
+        <li><span>🔎</span> Search</li>
+        <li><span>📄</span> Gather</li>
+        <li><span>🧮</span> Score</li>
         <li><span>✍️</span> Draft</li>
       </ul>
-     </span> <p style="margin-top:4vh;">Four verbs. Instead of one answer, the agent runs a pipeline and returns <strong>ranked evidence, scores</strong>, and drafts</strong> a human can review.</p>
+      <p style="margin-top:4vh;">Four verbs. Instead of one answer, the agent runs a pipeline and returns <strong>ranked evidence, scores, and drafts</strong> a human can review.</p>
     </section>
 
-    <!-- 4. Use case 1 -->
+    <!-- 4. Why not just a chatbot -->
+    <section class="slide">
+      <div class="kicker">The gap</div>
+      <h2>Why not just a chatbot?</h2>
+      <div class="compare">
+        <div class="compare-col bad">
+          <div class="compare-head">Generic chatbot</div>
+          <ul>
+            <li>You paste links &amp; data, then copy results back out by hand</li>
+            <li>No tools — can't search the live web, open a PDF, or read a table</li>
+            <li>No fixed rubric — scores and checks drift or get invented</li>
+            <li>One-shot text reply, not a repeatable pipeline</li>
+          </ul>
+        </div>
+        <div class="vs">vs</div>
+        <div class="compare-col good">
+          <div class="compare-head">Tailor-made agent</div>
+          <ul>
+            <li>Reads your files and criteria directly</li>
+            <li>Calls real tools — search, fetch, parse, validate</li>
+            <li>Applies the exact rubric / rules every time</li>
+            <li>Returns structured, ranked, traceable output</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Use case 1 — data map -->
     <section class="slide">
       <div class="kicker">Use case 1 · Chris</div>
       <h2>OIRP Evidence Assistant</h2>
-      <p class="</h2>lead" style="margin-top:2vh;">Find and score <strong>public web evidence</strong</strong>> for the THE Sustainability Impact Ratings.</p>
-      <div class="flow">
-        <div class="step">Read a criterion</div>
-        <div class="arrow">→</div>
-        <div class="step">Search HKBU public web</div>
-        <div class="arrow">→</div>
-        <div class="step">Fetch HTML + PDF</div>
-        <div class="arrow">→</div>
-        <div class="step">Score vs THE rubric</div>
-        <div class="arrow">→</div>
-        <div class="step">Draft gaps</div>
+      <p class="lead" style="margin-top:2vh;">Finds and scores <strong>public web evidence</strong> for the THE Sustainability Impact Ratings.</p>
+      <div class="datamap">
+        <div class="stage">
+          <div class="stage-label">Input</div>
+          <div class="box">SDG criterion<small>from THE Methodology 2026</small></div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage process">
+          <div class="stage-label">Process</div>
+          <div class="box">Search HKBU public web<small>Brave API + known hubs</small></div>
+          <div class="box">Fetch sources<small>HTML + PDF</small></div>
+          <div class="box">Score vs THE rubric<small>statement + relevance + public</small></div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage">
+          <div class="stage-label">Output</div>
+          <div class="box">Ranked evidence table<small>+ explanations</small></div>
+          <div class="box">Draft for gaps<small>content to fill</small></div>
+        </div>
       </div>
     </section>
 
-    <!-- 5. Use case 2 -->
+    <!-- 6. Use case 2 — data map -->
     <section class="slide">
       <div class="kicker">Use case 2 · Daisy</div>
-      <h2>CDCF Data Check</h2>er</h2>
-      <p class="lead" style="margin-top:2vh;">Real-time <strong>data checking</strong> + trend analysis</strong> for CDCF Table 20.1 (Student Enrolment).</p>
-      <div class="flow">
-        <div class="step">Units upload tables</div>
-        <div class="arrow">→</div>
-        <div class="step">AI checks + trends</div>
-        <div class="arrow">→</div>
-        <div class="step">Units revise</div>
-        <div class="arrow">→</div>
-        <div class="step">Submit to OIRP → UGC</div>
+      <h2>CDCF Data Checker</h2>
+      <p class="lead" style="margin-top:2vh;">Real-time <strong>data checking + trend analysis</strong> for CDCF Table 20.1 (Student Enrolment).</p>
+      <div class="datamap">
+        <div class="stage">
+          <div class="stage-label">Input</div>
+          <div class="box">CDCF tables<small>Table 20.1, uploaded by units</small></div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage process">
+          <div class="stage-label">Process</div>
+          <div class="box">Validate fields<small>HEI, dates, codes, FTE arithmetic, duplicates</small></div>
+          <div class="box">Trend analysis<small>new vs historical, ≥30% flags</small></div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage">
+          <div class="stage-label">Output</div>
+          <div class="box">Errors + warnings<small>with fix guidance</small></div>
+          <div class="box">Units revise → OIRP → UGC</div>
+        </div>
       </div>
     </section>
 
-    <!-- 6. Try them live -->
+    <!-- 7. Try them live -->
     <section class="slide">
       <div class="kicker">Live demos</div>
-      <h2>Try them now</h2></h2>
+      <h2>Try them now</h2>
       <p style="margin-top:2vh;">Both tools are running on Railway. Open a link and explore.</p>
       <div class="cta-row">
         <a class="btn" href="https://oirp-production.up.railway.app" target="_blank" rel="noopener">
-          <span>OIRP</span> Evidence Assistant<small>oirp-production.up.railway</small>.app</small></span>
+          <span>OIRP Evidence Assistant<small>oirp-production.up.railway.app</small></span>
         </a>
         <a class="btn secondary" href="https://cdcf-production.up.railway.app" target="_blank" rel="noopener">
-          <span>CDCF Data Checker<small>cd</span></small>cf-production.up.railway.app</small></span>
+          <span>CDCF Data Checker<small>cdcf-production.up.railway.app</small></span>
         </a>
       </div>
     </section>
 
-    <!-- 7. Closing -->
+    <!-- 8. Closing -->
     <section class="slide">
       <div class="kicker">Thanks</div>
-      <h2>Questions</h2>?</h2>
-      <p style="margin-top:3vh;">Agentic AI turns your tools from assistants that <em>answer</em> into colleagues</em> that <em>act</em>.</p>
+      <h2>Questions?</h2>
+      <p style="margin-top:3vh;">Agentic AI turns your tools from assistants that <em>answer</em> into colleagues that <em>act</em>.</p>
     </section>
 
   </main>
 
-  <div</em> class="footer">
-    <span>Agentic AI · ORIP Workshop</span></span>
+  <div class="footer">
+    <span>Agentic AI · ORIP Workshop</span>
     <div class="controls">
       <button id="prev" aria-label="Previous">‹</button>
       <button id="next" aria-label="Next">›</button>
     </div>
-    <span class="counter" id="counter">1 / 7</span>
+    <span class="counter" id="counter">1 / 8</span>
   </div>
   <div class="progress"><span id="bar"></span></div>
 
