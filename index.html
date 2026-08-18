@@ -251,12 +251,21 @@
   .progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width 0.3s ease; }
   .counter { font-variant-numeric: tabular-nums; }
 
+  .illustration {
+    position: absolute; top: 8vh; right: 5vw; width: 18vw; max-width: 260px;
+    border-radius: 14px; box-shadow: var(--shadow); opacity: 0.9; z-index: 2;
+  }
+  .slide.title-slide {
+    background: linear-gradient(115deg, rgba(246,247,251,0.93) 25%, rgba(246,247,251,0.45)),
+                url('assets/cc/hero.jpg') center/cover no-repeat;
+  }
   @media (max-width: 720px) {
     .grid.two, .grid.three { grid-template-columns: 1fr; }
     .bridge, .progression, .compare, .datamap { flex-direction: column; }
     .bridge-arrow, .prog-arrow, .datamap .stage-arrow { transform: rotate(90deg); align-self: center; }
     .vs { align-self: center; }
     .slide { padding: 6vh 6vw; }
+    .illustration { display: none; }
   }
 </style>
 </head>
@@ -264,7 +273,7 @@
   <main class="deck" id="deck">
 
     <!-- 1. Title -->
-    <section class="slide active">
+    <section class="slide active title-slide">
       <div class="kicker">ORIP Workshop · HKBU Language Centre</div>
       <h1>Agentic AI<br />in Action</h1>
       <p class="lead" style="margin-top:3vh;">Moving AI from <strong>answering questions</strong> to <strong>doing the work</strong> — searching, gathering evidence, scoring, and drafting.</p>
@@ -280,6 +289,7 @@
 
     <!-- 3. LLMs write code -->
     <section class="slide">
+      <img class="illustration" src="assets/cc/neural.png" alt="Neural network diagram" />
       <div class="kicker">The key insight</div>
       <h2>An LLM writes code,<br />not just text</h2>
       <p class="lead" style="margin-top:3vh;">Beyond humanlike prose, an LLM can generate <strong>programming code</strong> — and code is what makes a computer <em>do</em> work.</p>
@@ -559,6 +569,7 @@
       <div class="kicker">Thanks</div>
       <h2>Questions?</h2>
       <p style="margin-top:3vh;">Agentic AI turns your tools from assistants that <em>answer</em> into colleagues that <em>act</em>.</p>
+      <p style="margin-top:2.5vh; font-size:0.8rem; opacity:0.65;">Images via Wikimedia Commons: Pixabay (CC0) · Heptagon (public domain) · Dennis (CC BY 4.0) · QuantuMechaniX8 (CC0).</p>
     </section>
 
   </main>
