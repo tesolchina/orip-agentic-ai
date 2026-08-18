@@ -171,7 +171,7 @@
     color: var(--ink);
   }
   .datamap .box small { display: block; font-weight: 500; color: var(--muted); font-size: 0.82em; margin-top: 0.3vh; }
-  .datamap .stage-arrow { align-self: center; font-size: 2rem; color: var(--accent); font-weight: 800; }
+  .datamap .stage-arrow { align-self: center; font-size: 1.4rem; padding: 0 0.4vw; line-height: 1; color: var(--accent); font-weight: 800; }
 
   .cta-row { display: flex; gap: 2vw; margin-top: 5vh; flex-wrap: wrap; }
   a.btn {
@@ -467,7 +467,7 @@
     <section class="slide">
       <div class="kicker">Design framework</div>
       <h2>Input → Process → Output</h2>
-      <p class="lead" style="margin-top:2vh;">Every AI system — and every task — can be designed as three stages, with feedback closing the loop.</p>
+      <p class="lead" style="margin-top:2vh;">Every AI system — and every task — can be designed as three stages. It's the model we'll use to <strong>design and teach</strong> every tool in this workshop.</p>
       <div class="datamap">
         <div class="stage">
           <div class="stage-label">1 · Input</div>
@@ -484,13 +484,14 @@
           <div class="box">A result for the next step<small>format · quality · feedback</small></div>
         </div>
       </div>
-      <p style="margin-top:3vh;">↺ Feedback from the output loops back to improve the input and the process.</p>
+      <p style="margin-top:4.5vh; padding-top:1vh;">↺ Feedback from the output loops back to improve the input and the process.</p>
     </section>
 
     <!-- 12. Input -->
     <section class="slide">
       <div class="kicker">1 · Input</div>
       <h2>What you feed in matters</h2>
+      <p class="lead" style="margin-top:2vh;">Garbage in, garbage out — the quality of the output is set by the quality of the input, and by how well it's processed.</p>
       <div class="grid two">
         <div class="card">
           <h3>Inputs shape the result</h3>
@@ -507,6 +508,10 @@
         <div class="card">
           <h3>Input ↔ process is a loop</h3>
           <p>They're not cleanly separated: a processing step often feeds back into what counts as input.</p>
+        </div>
+        <div class="card">
+          <h3>Agents handle harder input</h3>
+          <p>An agent can <em>write code</em> to convert a PDF to plain text or re-shape a spreadsheet — a chat window can't. More input types, processed the way you choose.</p>
         </div>
       </div>
     </section>
@@ -552,7 +557,27 @@
       </div>
     </section>
 
-    <!-- 15. Use case 1 — data map -->
+    <!-- 15. Two use cases preview -->
+    <section class="slide">
+      <div class="kicker">Framework in action</div>
+      <h2>Two use cases today</h2>
+      <div class="grid two">
+        <div class="card">
+          <span class="pill">Use case 1</span>
+          <h3>OIRP Evidence Assistant</h3>
+          <p>Find + score public web evidence for the THE Sustainability Impact Ratings.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Use case 2</span>
+          <h3>CDCF Data Checker</h3>
+          <p>Real-time data checking + trend analysis for CDCF Table 20.1 submissions.</p>
+        </div>
+      </div>
+      <p style="margin-top:2.5vh;">Both tools follow the same <strong>Input → Process → Output</strong> model — designed with the human in the loop.</p>
+      <p style="margin-top:1.5vh; padding:1.1vh 1.4vw; background:#fef3c7; border-radius:10px; font-weight:600; color:#1c2333;">📝 Note — workflows were discussed by email so far. If the team wants to automate more, we should map the workflow + automation requirements together.</p>
+    </section>
+
+    <!-- 16. Use case 1 — data map -->
         <section class="slide">
       <img class="illustration" src="assets/cc/search.jpg" alt="Magnifying glass" />
       <div class="kicker">Framework in action · Use case 1 · Chris</div>
@@ -579,15 +604,17 @@
         </div>
       </div>
       <p style="margin-top:2.2vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🧑‍💼 Human in the loop — OIRP reviews + submits; a colleague publishes drafted content.</p>
+      <p style="margin-top:1.2vh; padding:1.1vh 1.4vw; background:#fef3c7; border-radius:10px; font-weight:600; color:#1c2333;">⏱️ The manual way — search each indicator, open every page, re-score by eye, draft by hand: <strong>hours per indicator</strong>. This agent does it in minutes, with a trace you can check.</p>
       <p style="margin-top:1.2vh;"><span class="pill">Key finding</span> 17.2.1 scored 1/3 — real activity, wrong wording (the "keyword pitfall").</p>
+      <p style="margin-top:1.2vh;"><span class="pill">Try it</span> In the AI Consultant, enter workshop code <strong>`sdg2026`</strong> — shared Poe key, valid until 12:00 noon, 19 Aug 2026 (HKT).</p>
     </section>
 
-    <!-- 16. Use case 2 — data map -->
+    <!-- 17. Use case 2 — data map -->
         <section class="slide">
       <img class="illustration" src="assets/cc/data.png" alt="Spreadsheet data" />
       <div class="kicker">Framework in action · Use case 2 · Daisy</div>
       <h2>CDCF Data Checker</h2>
-      <p class="lead" style="margin-top:2vh;">Real-time <strong>data checking + trend analysis</strong> for CDCF Table 20.1.</p>
+      <p class="lead" style="margin-top:2vh;">CDCF = <strong>Common Data Collection Framework</strong> — Table 20.1 Student Enrolment (UGC-funded Long Programmes). Units upload their table; the tool checks it <strong>before</strong> submission to OIRP.</p>
       <div class="datamap">
         <div class="stage">
           <div class="stage-label">Input</div>
@@ -608,14 +635,17 @@
         </div>
       </div>
       <p style="margin-top:2.2vh; padding:1.1vh 1.4vw; background:#eef0ff; border-radius:10px; font-weight:600; color:#1c2333;">🧑‍💼 Human in the loop — units fix + confirm; OIRP does the high-level check.</p>
+      <p style="margin-top:1.2vh; padding:1.1vh 1.4vw; background:#fef3c7; border-radius:10px; font-weight:600; color:#1c2333;">⏱️ The manual way — open the table, eyeball codes and totals, compare against last year by hand: slow and easy to miss. The checker runs every rule on every row in seconds.</p>
       <p style="margin-top:1.2vh;"><span class="pill">Key finding</span> 6 planted errors — each rule catches a different one.</p>
+      <p style="margin-top:1.2vh;"><span class="pill">Try it</span> In the AI Consultant, enter workshop code <strong>`cdcf2026`</strong> — shared Poe key, valid until 12:00 noon, 19 Aug 2026 (HKT).</p>
     </section>
 
-    <!-- 17. Try them live -->
+    <!-- 18. Try them live -->
     <section class="slide">
       <div class="kicker">Live demos</div>
       <h2>Try them now</h2>
       <p style="margin-top:2vh;">Both tools are running on Railway. Scan the QR (top-right) to open these slides, or jump straight to a tool.</p>
+      <p style="margin-top:1.5vh;">💬 In each tool's <strong>AI Consultant</strong>, enter the workshop code: <strong>`sdg2026`</strong> (OIRP) or <strong>`cdcf2026`</strong> (CDCF) — shared Poe key, valid until <strong>12:00 noon, 19 Aug 2026 (HKT)</strong>.</p>
       <div class="cta-row">
         <a class="btn" href="https://oirp-production.up.railway.app" target="_blank" rel="noopener">
           <span>OIRP Evidence Assistant<small>oirp-production.up.railway.app</small></span>
@@ -626,7 +656,7 @@
       </div>
     </section>
 
-    <!-- 18. Closing -->
+    <!-- 19. Closing -->
     <section class="slide">
       <img class="illustration" src="assets/cc/hero.jpg" alt="Artificial intelligence" />
       <div class="kicker">Thanks</div>
